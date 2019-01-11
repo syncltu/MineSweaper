@@ -14,10 +14,8 @@ namespace MineSweaper
     public partial class Form1 : Form
     {
         public Form1()
-        {
-            
+        {            
             InitializeComponent();
-            
         }
         public int Columns = 0;
         public int Rows = 0;
@@ -63,7 +61,7 @@ namespace MineSweaper
             {
                 for (int y = 0; y <= bound1; y++)
                 {
-                    fields[x, y] = new FieldProperties(x, y);
+                    fields[x, y] = new FieldProperties(this, x, y);
                     Controls.Add(fields[x, y]);
                 }
             }
@@ -108,7 +106,7 @@ namespace MineSweaper
             {
                 for (int y = 0; y < Columns; y++)
                 {
-                    if (fields[x, y].IsExplosive == false)
+                    if (!fields[x, y].IsExplosive)
                     {
                         fields[x, y].Text = fields[x, y].MinesNearby.ToString();
                     }
