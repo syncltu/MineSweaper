@@ -9,25 +9,27 @@ using MineSweaper;
 
 namespace MineSweaper
 {
-    public class FieldProperties:Button
+    public class FieldProperties : Button
     {
-        private static int OffsetFromCorners=100;
-        private Form1 parent;
+        private const int OffsetFromCorners = 100;
 
+        public int X { get; set; }
+        public int Y { get; set; }
         public bool IsExplosive { get; set; }
         public int MinesNearby { get; set; }
 
-        public FieldProperties(Form1 parent, int x, int y, bool explosive=false,int minesNearby = 0)
+        public FieldProperties(int x, int y, bool explosive = false, int minesNearby = 0)
         {
-            this.parent = parent;
+            X = x;
+            Y = y;
             IsExplosive = explosive;
             MinesNearby = minesNearby;
             Height = 30;
             Width = 30;
-            Location = new Point(OffsetFromCorners+x * 35,y * 35+OffsetFromCorners);
+            Location = new Point(OffsetFromCorners + x * 35, y * 35 + OffsetFromCorners);
             IsExplosive = explosive;
             MinesNearby = minesNearby;
-            IsChecked = isChecked;     
+            IsChecked = isChecked;
         }
 
         protected override void OnMouseUp(MouseEventArgs mevent)
@@ -35,7 +37,8 @@ namespace MineSweaper
             base.OnMouseUp(mevent);
             if (mevent.Button==MouseButtons.Left)
             {
-                IsChecked = true;   
+                IsChecked = true;
+                (Parent as Form1).Reveal0(X, Y);
             }
         }
 

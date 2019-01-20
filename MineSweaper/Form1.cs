@@ -17,8 +17,9 @@ namespace MineSweaper
         {            
             InitializeComponent();
         }
-        public int Columns = 0;
-        public int Rows = 0;
+        private int columns;
+        private int rows;
+        public FieldProperties[,] MineField { get; set; }
 
         public void InitializeBoard(int rows, int columns)
         {
@@ -30,14 +31,15 @@ namespace MineSweaper
             textBox5.Dispose();
             textBox2.Dispose();
             button4.Location = new Point(279, 700);
-            button4.Text = Columns.ToString() + "," + Rows.ToString();
-            CreateFields(Rows, Columns);
+            button4.Text = columns.ToString() + "," + rows.ToString();
+            CreateFields(rows, columns);
             
 
         }
-        private void Reveal0(int fieldX, int fieldY, FieldProperties[,] fields)
-        {
-            if (fields[fieldX, fieldY].IsChecked == true && fields[fieldX, fieldY].MinesNearby == 0)
+
+        public void Reveal0(int fieldX, int fieldY)
+        {            
+            if (MineField[fieldX, fieldY].IsChecked == true && MineField[fieldX, fieldY].MinesNearby == 0)
             {
                 for (int x = -1; x <= 1; x++)
                 {
@@ -45,10 +47,9 @@ namespace MineSweaper
                     {
                         int targetX = fieldX + x;
                         int targetY = fieldY + y;
-                        if (targetX >= 0 && targetX < Rows && targetY >= 0 && targetY < Columns && fields[targetX, targetY].IsChecked == false)
+                        if (targetX >= 0 && targetX < rows && targetY >= 0 && targetY < columns && MineField[targetX, targetY].IsChecked == false)
                         {
-
-                            fields[targetX, targetY].IsChecked = true;
+                            MineField[targetX, targetY].IsChecked = true;
                         }
                     }
                 }
@@ -58,19 +59,19 @@ namespace MineSweaper
         public void button1_Click(object sender, EventArgs e)
         {
 
-            int.TryParse(textBox3.Text, out Columns);
-            int.TryParse(textBox4.Text, out Rows);
-            if (Rows < 2)
+            int.TryParse(textBox3.Text, out columns);
+            int.TryParse(textBox4.Text, out rows);
+            if (rows < 2)
             {
                 button1.Text = "Number of rows must be more than 2!";
             }
-            else if (Columns < 2)
+            else if (columns < 2)
             {
                 button1.Text = "Number of columns must be more than 2!";
             }
             else
             {
-                InitializeBoard(Rows, Columns);
+                InitializeBoard(rows, columns);
             }
         }
         public void CreateFields(int rows, int columns)
@@ -82,7 +83,7 @@ namespace MineSweaper
             {
                 for (int y = 0; y <= bound1; y++)
                 {
-                    fields[x, y] = new FieldProperties(this, x, y);
+                    fields[x, y] = new FieldProperties(x, y);
                     Controls.Add(fields[x, y]);
                     
 
@@ -90,17 +91,17 @@ namespace MineSweaper
             }
             PlaceMines(fields);
             CountNearbyMines(fields);
-            
+            MineField = fields;
         }
         public void PlaceMines(FieldProperties[,] fields)
         {
             
-            int mineCount = Convert.ToInt32(Math.Sqrt(Rows * Columns));
+            int mineCount = Convert.ToInt32(Math.Sqrt(rows * columns));
             Random rand = new Random();
             while (mineCount > 0)
             {
-                int targetX = rand.Next(Rows);
-                int targetY = rand.Next(Columns);
+                int targetX = rand.Next(rows);
+                int targetY = rand.Next(columns);
                 if (fields[targetX, targetY].IsExplosive == false)
                 {
                     fields[targetX, targetY].IsExplosive = true;
@@ -110,9 +111,9 @@ namespace MineSweaper
         }
         private void CountNearbyMines(FieldProperties[,] fields)
         {
-            for (int x = 0; x < Rows; x++)
+            for (int x = 0; x < rows; x++)
             {
-                for (int y = 0; y < Columns; y++)
+                for (int y = 0; y < columns; y++)
                 {
                     if (fields[x, y].IsExplosive == true)
                     {
@@ -123,13 +124,13 @@ namespace MineSweaper
         }
         private void PrintSigns(FieldProperties[,] fields)
         {
-            for (int x = 0; x < Rows; x++)
+            for (int x = 0; x < rows; x++)
             {
-                for (int y = 0; y < Columns; y++)
+                for (int y = 0; y < columns; y++)
                 {
                     if (!fields[x, y].IsExplosive)
                     {
-                        Reveal0(x, y, fields);
+                        Reveal0(x, y);
                     }
                 }
             }
@@ -144,7 +145,7 @@ namespace MineSweaper
                 {
                     int targetX = fieldX + x;
                     int targetY = fieldY + y;
-                    if (targetX >= 0 && targetX < Rows && targetY >= 0 && targetY < Columns && fields[targetX, targetY].IsExplosive == false)
+                    if (targetX >= 0 && targetX < rows && targetY >= 0 && targetY < columns && fields[targetX, targetY].IsExplosive == false)
                     {
                         mineCount++;
                         fields[targetX, targetY].MinesNearby++;
