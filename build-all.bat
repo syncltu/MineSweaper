@@ -1,1 +1,1 @@
-MSBuild.exe /t:rebuild
+MSBuild.exe /t:rebuild MineSweaper.sln
