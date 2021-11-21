@@ -1,11 +1,8 @@
 name: CI Checks
 on:
   push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
-    # Allow manual trigger for debugging the workflow.
 env:
   SONAR_WRAPPER_URL: https://sonarcloud.io/static/cpp/build-wrapper-win-x86.zip
   SONAR_SCANNER_URL: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.4.0.2170-windows.zip
