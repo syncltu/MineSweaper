@@ -1,0 +1,9 @@
+O
+FC:\Users\marty\source\repos\MineSweaper\MineSweaper\FieldProperties.csutf-8E
+<C:\Users\marty\source\repos\MineSweaper\MineSweaper\Form1.csutf-8P
+EC:\Users\marty\source\repos\MineSweaper\MineSweaper\Form1.Designer.csutf-8G
+>C:\Users\marty\source\repos\MineSweaper\MineSweaper\Program.csutf-8W
+NC:\Users\marty\source\repos\MineSweaper\MineSweaper\Properties\AssemblyInfo.csutf-8_
+TC:\Users\marty\source\repos\MineSweaper\MineSweaper\Properties\Resources.Designer.csutf-8^
+SC:\Users\marty\source\repos\MineSweaper\MineSweaper\Properties\Settings.Designer.csutf-8{
+pC:\Users\marty\source\repos\MineSweaper\MineSweaper\obj\Debug\.NETFramework,Version=v4.6.1.AssemblyAttributes.csutf-8
