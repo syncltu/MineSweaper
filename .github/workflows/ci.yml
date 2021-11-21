@@ -35,7 +35,7 @@ jobs:
       shell: cmd
       run: |
         SET PATH=%PATH%;%cd%\build\build-wrapper-win-x86
-        build-wrapper-win-x86-64 --out-dir build\bw_output 
+        build-wrapper-win-x86-64 --out-dir build\bw_output MSBuild.exe /t:rebuild
         
     - name: Prepare Sonar Scanner
       shell: bash
