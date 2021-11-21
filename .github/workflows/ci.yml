@@ -36,8 +36,7 @@ jobs:
       run: |
         SET PATH=%PATH%;%cd%\build\build-wrapper-win-x86
         build-wrapper-win-x86-64 --out-dir build\bw_output
-        SonarScanner begin /k:"testingas" /o:"diroots" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-        SonarScanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        MSBuild.exe /t:rebuild
 
     - name: Prepare Sonar Scanner
       shell: bash
