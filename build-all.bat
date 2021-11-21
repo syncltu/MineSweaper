@@ -1,0 +1,1 @@
+MSBuild.exe /t:rebuild
