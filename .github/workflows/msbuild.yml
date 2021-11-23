@@ -30,7 +30,7 @@ jobs:
         PATH: ''
 
     - name: Setup MSBuild (x64)
-      id: setup_msbuild_path
+      id: setup_msbuild_path2
       uses: ./
       with:
         vs-prerelease: true
@@ -40,6 +40,6 @@ jobs:
       run: |
         echo "vswhere-path: ${{ steps.setup_msbuild_explicit.outputs.msbuildPath }}"
         echo "PATH: ${{ steps.setup_msbuild_path.outputs.msbuildPath }}"
-        echo "Fallback: ${{ steps.setup_msbuild_fallback.outputs.msbuildPath }}"
+        echo "Fallback: ${{ steps.setup_msbuild_fallback.outputs.msbuildPath2 }}"
     - name: echo MSBuild
       run: msbuild -version
