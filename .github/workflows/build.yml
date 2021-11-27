@@ -75,6 +75,6 @@ jobs:
       shell: powershell
       run: |
         .\.sonar\scanner\dotnet-sonarscanner begin /k:"minesweep" /o:"syncltu" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-        ${{ steps.setup_msbuild_explicit.outputs.msbuildPath }}\MsBuild.exe /t:Rebuild
+        msbuild /t:Rebuild
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           
