@@ -33,6 +33,7 @@ namespace MineSweaper
             button4.Location = new Point(279, 700);
             button4.Text = columns.ToString() + "," + rows.ToString();
             CreateFields(rows, columns);
+            //test
             
 
         }
